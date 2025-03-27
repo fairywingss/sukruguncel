@@ -127,7 +127,7 @@ body {
     margin: 0 0 20px 0;
 }
 
-/* Menü Stili */
+/ zes/* Menü Stili */
 .menu {
     width: 100%;
     text-align: center;
@@ -582,25 +582,28 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Tap animasyonu stili */
-.tap-animation {
-    position: fixed;
+/* Profil Kapatma Animasyonu Stili */
+.close-profile-animation {
+    position: absolute;
     bottom: 20px;
     right: 20px;
-    width: 50px;
-    height: 50px;
     z-index: 15;
     opacity: 0; /* Varsayılan olarak gizli */
     pointer-events: none; /* Tıklanabilirliği engelle */
-    display: none; /* Varsayılan olarak görünmez */
+    transition: opacity 0.3s ease; /* Solarak açılıp kapanması için */
 }
 
-/* Fade-in/out animasyonu */
-@keyframes fadeInOut {
-    0% { opacity: 0; }
-    25% { opacity: 0.7; } /* Hafif soluk bir görünüm */
+/* Animasyon göründüğünde */
+.close-profile-animation.visible {
+    opacity: 1;
+    animation: blink 2s infinite; /* 1 sn görünür, 1 sn görünmez */
+}
+
+/* Yanıp sönme animasyonu */
+@keyframes blink {
+    0% { opacity: 1; }
     50% { opacity: 0; }
-    100% { opacity: 0; }
+    100% { opacity: 1; }
 }
 
 /* Mobil uyumluluk */
@@ -709,9 +712,13 @@ body {
         font-size: 14px;
         padding: 5px 10px;
     }
-    /* Tap animasyonu mobil görünürlüğü */
-    .tap-animation.visible {
-        display: block;
-        animation: fadeInOut 2s infinite ease-in-out; /* 1 sn görünür, 1 sn görünmez */
+    /* Profil kapatma animasyonu sadece mobilde görünsün */
+    .close-profile-animation {
+        display: none; /* Varsayılan olarak gizli */
+    }
+    @media (max-width: 768px) {
+        .close-profile-animation {
+            display: block; /* Mobilde görünsün */
+        }
     }
 }
