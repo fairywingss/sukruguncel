@@ -49,6 +49,10 @@ function goToSlide(index, fromArtworksButton = false) {
             artistProfile.classList.add('hidden');
             tapHint.classList.remove('visible'); // Profil kapanırken tap animasyonu kaybolur
         }
+        // Profil kapandığında otomatik kaydırmayı başlat
+        if (!isAutoScrollPaused) {
+            startAutoScroll();
+        }
     } else {
         isProfileVisible = true;
         artistCard.classList.remove('visible');
@@ -58,6 +62,8 @@ function goToSlide(index, fromArtworksButton = false) {
         if (window.innerWidth <= 768) {
             tapHint.classList.add('visible');
         }
+        // Profil açıkken otomatik kaydırmayı durdur
+        clearInterval(autoScrollInterval);
     }
 
     // Spot ışığını belirginleştir ve kaybolmasını sağla
@@ -423,6 +429,12 @@ document.addEventListener('keydown', (e) => {
 
 // Otomatik kaydırma fonksiyonu
 function startAutoScroll() {
+    // Profil alanı açıksa otomatik kaydırmayı başlatma
+    if (isProfileVisible) {
+        clearInterval(autoScrollInterval);
+        return;
+    }
+
     autoScrollInterval = setInterval(() => {
         const visibleArtworks = Array.from(artworks).filter(artwork => artwork.style.display !== 'none');
         let newSlide = currentSlide + autoScrollDirection;
@@ -442,7 +454,7 @@ function startAutoScroll() {
 // Otomatik kaydırmayı sıfırlama ve yeniden başlatma
 function resetAutoScroll() {
     clearInterval(autoScrollInterval);
-    if (!isAutoScrollPaused) {
+    if (!isAutoScrollPaused && !isProfileVisible) { // Profil kapalıysa yeniden başlat
         startAutoScroll();
     }
 }
