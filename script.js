@@ -6,7 +6,6 @@ const artistProfile = document.querySelector('.artist-profile');
 const artistCard = document.querySelector('.artist-card');
 const blurOverlay = document.querySelector('.blur-overlay');
 const artworks = document.querySelectorAll('.artwork');
-const tapAnimation = document.getElementById('tapAnimation');
 const totalSlides = artworks.length;
 const backgroundWidth = 1920;
 let autoScrollInterval;
@@ -15,6 +14,7 @@ let currentLang = 'tr';
 const hasAppeared = Array(totalSlides).fill(false); // Hangi eserin göründüğünü takip etmek için
 let isProfileVisible = true; // Profil alanının görünürlüğünü takip etmek için
 let isAutoScrollPaused = false; // Otomatik kaydırmanın duraklatıldığını takip etmek için
+const closeProfileAnimation = document.querySelector('.close-profile-animation'); // Yeni animasyon elementi
 
 // Slayt değiştirme fonksiyonu
 function goToSlide(index, fromArtworksButton = false) {
@@ -35,25 +35,22 @@ function goToSlide(index, fromArtworksButton = false) {
     const profileOffset = -(currentSlide * artistProfile.offsetWidth);
     artistProfile.style.transform = `translateX(${profileOffset}px)`;
 
-    // Profil alanı kaybolduğunda kartı göster ve animasyonu gizle
+    // Profil alanı kaybolduğunda kartı göster ve animasyonu kontrol et
     if (fromArtworksButton || currentSlide > 0) {
         isProfileVisible = false;
         artistCard.classList.add('visible');
         // Mobil cihazlarda profil alanını yavaşça sola kaydır ve animasyonu gizle
         if (window.innerWidth <= 768) {
             artistProfile.classList.add('hidden');
-            tapAnimation.classList.remove('visible');
+            closeProfileAnimation.classList.remove('visible'); // Animasyon solarak kaybolur
         }
     } else {
         isProfileVisible = true;
         artistCard.classList.remove('visible');
-        // Profil alanını tekrar görünür yap (yavaşça geri kaydır)
+        // Profil alanını tekrar görünür yap (yavaşça geri kaydır) ve animasyonu göster
         artistProfile.classList.remove('hidden');
-        // Mobil cihazlarda animasyonu göster
         if (window.innerWidth <= 768) {
-            tapAnimation.classList.add('visible');
-        } else {
-            tapAnimation.classList.remove('visible');
+            closeProfileAnimation.classList.add('visible'); // Animasyon solarak belirir
         }
     }
 
@@ -451,17 +448,3 @@ startAutoScroll();
 
 // Varsayılan dil: Türkçe
 changeLanguage('tr');
-
-// İlk yüklemede animasyonu kontrol et
-if (window.innerWidth <= 768 && isProfileVisible) {
-    tapAnimation.classList.add('visible');
-}
-
-// Pencere boyutu değiştiğinde animasyonu kontrol et
-window.addEventListener('resize', () => {
-    if (window.innerWidth <= 768 && isProfileVisible) {
-        tapAnimation.classList.add('visible');
-    } else {
-        tapAnimation.classList.remove('visible');
-    }
-});
