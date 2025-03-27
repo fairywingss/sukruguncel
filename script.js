@@ -14,7 +14,12 @@ let currentLang = 'tr';
 const hasAppeared = Array(totalSlides).fill(false); // Hangi eserin göründüğünü takip etmek için
 let isProfileVisible = true; // Profil alanının görünürlüğünü takip etmek için
 let isAutoScrollPaused = false; // Otomatik kaydırmanın duraklatıldığını takip etmek için
-const closeProfileAnimation = document.querySelector('.close-profile-animation'); // Yeni animasyon elementi
+
+// Tap animasyonu için yeni öğe oluştur
+const tapHint = document.createElement('img');
+tapHint.src = 'images/tap.gif';
+tapHint.classList.add('tap-hint');
+document.querySelector('.gallery-container').appendChild(tapHint);
 
 // Slayt değiştirme fonksiyonu
 function goToSlide(index, fromArtworksButton = false) {
@@ -35,22 +40,23 @@ function goToSlide(index, fromArtworksButton = false) {
     const profileOffset = -(currentSlide * artistProfile.offsetWidth);
     artistProfile.style.transform = `translateX(${profileOffset}px)`;
 
-    // Profil alanı kaybolduğunda kartı göster ve animasyonu kontrol et
+    // Profil alanı kaybolduğunda kartı göster ve tap animasyonunu kontrol et
     if (fromArtworksButton || currentSlide > 0) {
         isProfileVisible = false;
         artistCard.classList.add('visible');
-        // Mobil cihazlarda profil alanını yavaşça sola kaydır ve animasyonu gizle
+        // Mobil cihazlarda profil alanını yavaşça sola kaydır ve tap animasyonunu gizle
         if (window.innerWidth <= 768) {
             artistProfile.classList.add('hidden');
-            closeProfileAnimation.classList.remove('visible'); // Animasyon solarak kaybolur
+            tapHint.classList.remove('visible'); // Profil kapanırken tap animasyonu kaybolur
         }
     } else {
         isProfileVisible = true;
         artistCard.classList.remove('visible');
-        // Profil alanını tekrar görünür yap (yavaşça geri kaydır) ve animasyonu göster
+        // Profil alanını tekrar görünür yap (yavaşça geri kaydır)
         artistProfile.classList.remove('hidden');
+        // Mobil cihazlarda ve profil görünürken tap animasyonunu göster
         if (window.innerWidth <= 768) {
-            closeProfileAnimation.classList.add('visible'); // Animasyon solarak belirir
+            tapHint.classList.add('visible');
         }
     }
 
