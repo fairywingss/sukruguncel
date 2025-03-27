@@ -48,10 +48,6 @@ function goToSlide(index, fromArtworksButton = false) {
         if (window.innerWidth <= 768) {
             artistProfile.classList.add('hidden');
             tapHint.classList.remove('visible'); // Profil kapanırken tap animasyonu kaybolur
-            // Profil kapandığında otomatik kaydırmayı yeniden başlat
-            if (!isAutoScrollPaused) {
-                startAutoScroll();
-            }
         }
     } else {
         isProfileVisible = true;
@@ -61,8 +57,6 @@ function goToSlide(index, fromArtworksButton = false) {
         // Mobil cihazlarda ve profil görünürken tap animasyonunu göster
         if (window.innerWidth <= 768) {
             tapHint.classList.add('visible');
-            // Profil açıkken otomatik kaydırmayı durdur
-            clearInterval(autoScrollInterval);
         }
     }
 
