@@ -50,15 +50,15 @@ function createArtworks() {
         title.textContent = artwork.title;
 
         const description = document.createElement('p');
-        description.setAttribute('data-lang-tr', artwork.description_tr);
-        description.setAttribute('data-lang-en', artwork.description_en);
-        description.textContent = artwork.description_tr;
+        description.setAttribute('data-lang-tr', artwork.description_tr || '');
+        description.setAttribute('data-lang-en', artwork.description_en || '');
+        description.textContent = artwork.description_tr || '';
 
         const details = document.createElement('p');
         details.classList.add('artwork-details');
-        details.setAttribute('data-lang-tr', artwork.details_tr);
-        details.setAttribute('data-lang-en', artwork.details_en);
-        details.textContent = artwork.details_tr;
+        details.setAttribute('data-lang-tr', artwork.details_tr || '');
+        details.setAttribute('data-lang-en', artwork.details_en || '');
+        details.textContent = artwork.details_tr || '';
 
         labelDiv.appendChild(title);
         labelDiv.appendChild(description);
@@ -344,9 +344,9 @@ function setupArtworkEvents() {
 
             galleryHeader.querySelector('h2').textContent = artwork.title;
             const descriptionP = galleryHeader.querySelector('p');
-            descriptionP.textContent = artwork[`description_${currentLang}`];
-            descriptionP.setAttribute('data-lang-tr', artwork.description_tr);
-            descriptionP.setAttribute('data-lang-en', artwork.description_en);
+            descriptionP.textContent = artwork[`description_${currentLang}`] || '';
+            descriptionP.setAttribute('data-lang-tr', artwork.description_tr || '');
+            descriptionP.setAttribute('data-lang-en', artwork.description_en || '');
 
             galleryImagesContainer.innerHTML = '';
 
@@ -354,13 +354,17 @@ function setupArtworkEvents() {
             mainImage.src = artwork.main_image;
             galleryImagesContainer.appendChild(mainImage);
 
-            const detailImage1 = document.createElement('img');
-            detailImage1.src = artwork.detail_image1;
-            galleryImagesContainer.appendChild(detailImage1);
+            if (artwork.detail_image1) {
+                const detailImage1 = document.createElement('img');
+                detailImage1.src = artwork.detail_image1;
+                galleryImagesContainer.appendChild(detailImage1);
+            }
 
-            const detailImage2 = document.createElement('img');
-            detailImage2.src = artwork.detail_image2;
-            galleryImagesContainer.appendChild(detailImage2);
+            if (artwork.detail_image2) {
+                const detailImage2 = document.createElement('img');
+                detailImage2.src = artwork.detail_image2;
+                galleryImagesContainer.appendChild(detailImage2);
+            }
 
             artworkGalleryPopup.style.display = 'flex';
 
