@@ -1,0 +1,32 @@
+name: Generate Artworks JSON
+
+on:
+  push:
+    branches:
+      - main # Kullandığın branch’e göre değiştir (örneğin "master")
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate artworks.json
+        run: npm run generate
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add artworks.json
+          git commit -m "Update artworks.json" || echo "No changes to commit"
+          git push
