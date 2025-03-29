@@ -1,6 +1,6 @@
 backend:
   name: git-gateway
-  branch: main # Kullandığın branch’e göre değişebilir (örneğin "master")
+  branch: main
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
 collections:
@@ -19,8 +19,6 @@ collections:
       - { label: "Malzeme (EN)", name: "material_en", widget: "string" }
       - { label: "Boyut (TR)", name: "size_tr", widget: "string" }
       - { label: "Boyut (EN)", name: "size_en", widget: "string" }
-      - { label: "Detaylar (TR)", name: "details_tr", widget: "string", default: "" }
-      - { label: "Detaylar (EN)", name: "details_en", widget: "string", default: "" }
       - { label: "Ana Görsel", name: "main_image", widget: "image" }
       - { label: "Detay Görsel 1", name: "detail_image1", widget: "image", required: false }
       - { label: "Detay Görsel 2", name: "detail_image2", widget: "image", required: false }
