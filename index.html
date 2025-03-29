@@ -73,7 +73,7 @@
                     <p>Şükrü Aslan, 2012 yılında Çukurova Üniversitesi Resim-İş Öğretmenliği Bölümü, Heykel Anabilim Dalı’ndan mezun oldu. 2016 yılında öğretmen olarak atandı. Çalışmalarında malzeme olarak metali tercih eden Şükrü Aslan, heykellerini “Varoluşçuluk” felsefesine dayandırarak üretmektedir.</p>
                     <p>Bunun yanı sıra, resimlerinde de aynı felsefi yaklaşımı benimseyerek insanın varoluşsal karmaşasını görsel bir dille ifade etmektedir. Sanatçı, çalışmalarına Mersin’de devam etmektedir.</p>
                     <p>“Heykellerimi konu olarak ‘Varoluşçu’ felsefeye dayalı figüratif bir yaklaşımla temellendirmeye çalışıyorum. Genellikle malzeme olarak metali kullanıyorum. Metal; direnebilir, kırılabilir, aşınabilir ve baskı altında şekil alabilir, tıpkı insan ruhu gibi. Bu açıdan metali ve insanı özdeş buluyorum.”</p>
-                    <p>“Heykellerimde bir anlatım biçimi olarak kullandığım karmaşık ve dolaşık tel yığınlarıyla, bireyin birkaç deneyimle var olmadığını; onu birey yapan birikimin, daha karmaşık bir ol Velocitygular bütünü olduğunu anlatmaya çalışıyorum. Bu bağlamda kullandığım tel yığını, birkaç kelimeyle açıklanamayacak kadar karmaşık olan bireyin özünü temsil etmektedir.”</p>
+                    <p>“Heykellerimde bir anlatım biçimi olarak kullandığım karmaşık ve dolaşık tel yığınlarıyla, bireyin birkaç deneyimle var olmadığını; onu birey yapan birikimin, daha karmaşık bir olgular bütünü olduğunu anlatmaya çalışıyorum. Bu bağlamda kullandığım tel yığını, birkaç kelimeyle açıklanamayacak kadar karmaşık olan bireyin özünü temsil etmektedir.”</p>
                 </div>
                 <!-- İngilizce Metin -->
                 <div class="about-text" data-lang-en>
@@ -125,5 +125,18 @@
     </div>
     <script src="artworks.js"></script>
     <script src="script.js"></script>
+    <!-- Netlify Identity Widget -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
 </body>
 </html>
