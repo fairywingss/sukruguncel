@@ -5,14 +5,31 @@ const spotlight = document.querySelector('.spotlight');
 const artistProfile = document.querySelector('.artist-profile');
 const artistCard = document.querySelector('.artist-card');
 const blurOverlay = document.querySelector('.blur-overlay');
-const totalSlides = artworksData.length; // artworks.js'den gelen veri
+let artworksData = []; // Başlangıçta boş, JSON’dan dolacak
 const backgroundWidth = 1920;
 let autoScrollInterval;
 let autoScrollDirection = 1;
 let currentLang = 'tr';
-const hasAppeared = Array(totalSlides).fill(false);
+let hasAppeared = [];
 let isProfileVisible = true;
 let isAutoScrollPaused = false;
+
+// JSON dosyasını çek ve eserleri oluştur
+async function loadArtworks() {
+    try {
+        const response = await fetch('/artworks.json');
+        artworksData = await response.json();
+        hasAppeared = Array(artworksData.length).fill(false); // hasAppeared’ı dinamik olarak ayarla
+        createArtworks();
+        setupArtworkEvents();
+        goToSlide(0);
+        filterArtworks('all');
+        startAutoScroll();
+        changeLanguage('tr');
+    } catch (error) {
+        console.error('Artworks yüklenirken hata oluştu:', error);
+    }
+}
 
 // Eserleri dinamik olarak oluştur
 function createArtworks() {
@@ -430,9 +447,4 @@ function resetAutoScroll() {
 }
 
 // İlk yükleme
-createArtworks();
-setupArtworkEvents();
-goToSlide(0);
-filterArtworks('all');
-startAutoScroll();
-changeLanguage('tr');
+loadArtworks();
