@@ -9,8 +9,8 @@
     "material_en": "malzeme ingilzice",
     "size_tr": "boyut türkçe",
     "size_en": "boyut ingizlie",
-    "details_tr": "detay tr",
-    "details_en": "detay eng",
+    "details_tr": "Resim: malzeme türkçe, boyut türkçe",
+    "details_en": "Painting: malzeme ingilzice, boyut ingizlie",
     "main_image": "/images/uploads/sodexo-gross.webp"
   },
   {
@@ -19,8 +19,8 @@
     "title": "Yeni Eser",
     "description_tr": "Yeni Sanat",
     "description_en": "New Art",
-    "details_tr": "Yeni Sanat",
-    "details_en": "New Art",
+    "details_tr": "",
+    "details_en": "",
     "main_image": "/images/uploads/post-1-1-.webp",
     "detail_image1": "/images/uploads/post-2-.webp",
     "detail_image2": "/images/uploads/localization-image.webp"
