@@ -1,22 +1,26 @@
 backend:
   name: git-gateway
-  branch: main # Eğer farklı bir branch kullanıyorsan, burayı değiştir (örneğin "master")
-media_folder: "images/uploads" # Görsellerin kaydedileceği klasör
-public_folder: "/images/uploads" # Sitedeki görsel yolu
+  branch: main # Kullandığın branch’e göre değişebilir (örneğin "master")
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
 collections:
   - name: "artworks"
     label: "Eserler"
-    folder: "artworks" # .md dosyalarının kaydedileceği klasör
+    folder: "artworks"
     create: true
-    slug: "{{slug}}" # Dosya adları başlık bazlı olacak
+    slug: "{{slug}}"
     fields:
       - { label: "Eser ID", name: "id", widget: "string" }
       - { label: "Kategori", name: "category", widget: "select", options: ["resim", "heykel"] }
       - { label: "Başlık", name: "title", widget: "string" }
       - { label: "Açıklama (TR)", name: "description_tr", widget: "string" }
       - { label: "Açıklama (EN)", name: "description_en", widget: "string" }
-      - { label: "Detaylar (TR)", name: "details_tr", widget: "string" }
-      - { label: "Detaylar (EN)", name: "details_en", widget: "string" }
+      - { label: "Malzeme (TR)", name: "material_tr", widget: "string" }
+      - { label: "Malzeme (EN)", name: "material_en", widget: "string" }
+      - { label: "Boyut (TR)", name: "size_tr", widget: "string" }
+      - { label: "Boyut (EN)", name: "size_en", widget: "string" }
+      - { label: "Detaylar (TR)", name: "details_tr", widget: "string", default: "" }
+      - { label: "Detaylar (EN)", name: "details_en", widget: "string", default: "" }
       - { label: "Ana Görsel", name: "main_image", widget: "image" }
-      - { label: "Detay Görsel 1", name: "detail_image1", widget: "image" }
-      - { label: "Detay Görsel 2", name: "detail_image2", widget: "image" }
+      - { label: "Detay Görsel 1", name: "detail_image1", widget: "image", required: false }
+      - { label: "Detay Görsel 2", name: "detail_image2", widget: "image", required: false }
