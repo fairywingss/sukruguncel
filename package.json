@@ -1,0 +1,12 @@
+{
+  "name": "sukru-aslan-sanat-galerisi",
+  "version": "1.0.0",
+  "description": "Şükrü Aslan Sanat Galerisi",
+  "main": "generate-artworks.js",
+  "scripts": {
+    "generate": "node generate-artworks.js"
+  },
+  "dependencies": {
+    "front-matter": "^4.0.2"
+  }
+}
