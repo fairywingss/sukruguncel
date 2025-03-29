@@ -3,7 +3,7 @@ name: Generate Artworks JSON
 on:
   push:
     branches:
-      - main # Kullandığın branch’e göre değiştir (örneğin "master")
+      - main
 
 jobs:
   generate:
@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }} # Varsayılan token’ı kullanıyoruz
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
