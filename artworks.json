@@ -1,16 +1,18 @@
 [
   {
-    "id": "teset",
+    "id": "1",
     "category": "resim",
-    "title": "Teste",
-    "description_tr": "test",
-    "description_en": "test",
-    "material_tr": "test",
-    "material_en": "test",
-    "size_tr": "test",
-    "size_en": "test",
-    "details_tr": "Resim: test, test",
-    "details_en": "Painting: test, test",
-    "main_image": "/images/uploads/post-1-1-.webp"
+    "title": "Meczup",
+    "description_tr": "Zihnin düğümlü karmaşası",
+    "description_en": "The knotted chaos of the mind",
+    "material_tr": "T.Ü.A.B",
+    "material_en": "AOC",
+    "size_tr": "80x100",
+    "size_en": "80x100",
+    "main_image": "/images/uploads/art1.jpg",
+    "detail_image1": "/images/uploads/art1-detail1.jpg",
+    "detail_image2": "/images/uploads/art1-detail2.jpg",
+    "details_tr": "Resim: T.Ü.A.B, 80x100",
+    "details_en": "Painting: AOC, 80x100"
   }
 ]
