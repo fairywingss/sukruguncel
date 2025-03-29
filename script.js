@@ -10,12 +10,13 @@ const backgroundWidth = 1920;
 let autoScrollInterval;
 let autoScrollDirection = 1;
 let currentLang = 'tr';
-const hasAppeared = Array(totalSlides).fill(false); // Hangi eserin göründüğünü takip etmek için
-let isProfileVisible = true; // Profil alanının görünürlüğünü takip etmek için
-let isAutoScrollPaused = false; // Otomatik kaydırmanın duraklatıldığını takip etmek için
+const hasAppeared = Array(totalSlides).fill(false);
+let isProfileVisible = true;
+let isAutoScrollPaused = false;
 
 // Eserleri dinamik olarak oluştur
 function createArtworks() {
+    galleryWall.innerHTML = ''; // Mevcut içeriği temizle
     artworksData.forEach(artwork => {
         const artworkDiv = document.createElement('div');
         artworkDiv.classList.add('artwork');
@@ -36,13 +37,13 @@ function createArtworks() {
         const description = document.createElement('p');
         description.setAttribute('data-lang-tr', artwork.description_tr);
         description.setAttribute('data-lang-en', artwork.description_en);
-        description.textContent = artwork.description_tr; // Varsayılan olarak Türkçe
+        description.textContent = artwork.description_tr;
 
         const details = document.createElement('p');
         details.classList.add('artwork-details');
         details.setAttribute('data-lang-tr', artwork.details_tr);
         details.setAttribute('data-lang-en', artwork.details_en);
-        details.textContent = artwork.details_tr; // Varsayılan olarak Türkçe
+        details.textContent = artwork.details_tr;
 
         labelDiv.appendChild(title);
         labelDiv.appendChild(description);
@@ -318,7 +319,7 @@ document.querySelector('.gallery-container').addEventListener('touchmove', (e) =
     }
 });
 
-// Eser resmine tıklama olayı (hem mobil hem masaüstü için pop-up galeri)
+// Eser resmine tıklama olayı (pop-up galeri)
 function setupArtworkEvents() {
     document.querySelectorAll('.artwork-image').forEach((image) => {
         image.setAttribute('draggable', 'false');
