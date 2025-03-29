@@ -21,10 +21,9 @@ async function loadArtworks() {
         hasAppeared = Array(artworksData.length).fill(false);
         createArtworks();
         setupArtworkEvents();
-        goToSlide(0);
+        goToSlide(0); // İlk açılışta profil açık kalır
         filterArtworks('all');
-        startAutoScroll();
-        changeLanguage('tr');
+        // Otomatik kaydırma burada başlamayacak, isProfileVisible kontrol edecek
     } catch (error) {
         console.error('Artworks yüklenirken hata oluştu:', error);
     }
@@ -90,10 +89,14 @@ function goToSlide(index, fromArtworksButton = false) {
         if (window.innerWidth <= 768) {
             artistProfile.classList.add('hidden');
         }
+        if (!isAutoScrollPaused) {
+            startAutoScroll(); // Profil kapanınca otomatik kaydırma başlar
+        }
     } else {
         isProfileVisible = true;
         artistCard.classList.remove('visible');
         artistProfile.classList.remove('hidden');
+        clearInterval(autoScrollInterval); // Profil açıkken otomatik kaydırma durur
     }
 
     spotlight.classList.add('visible');
@@ -136,7 +139,7 @@ function filterArtworks(category) {
     });
 
     currentSlide = 0;
-    goToSlide(0, true);
+    goToSlide(0, true); // 'Eserleri' butonundan gelirse profil kapanır
 }
 
 function changeLanguage(lang) {
@@ -242,7 +245,6 @@ document.querySelectorAll('.submenu-item').forEach(item => {
         const category = item.getAttribute('data-category');
         filterArtworks(category);
         resetAutoScroll();
-
         if (window.innerWidth <= 768) {
             const parentLi = item.closest('.has-submenu');
             parentLi.classList.remove('active');
@@ -409,6 +411,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 function startAutoScroll() {
+    if (isProfileVisible) return; // Profil açıkken otomatik kaydırma başlamaz
     autoScrollInterval = setInterval(() => {
         const visibleArtworks = Array.from(document.querySelectorAll('.artwork')).filter(artwork => artwork.style.display !== 'none');
         let newSlide = currentSlide + autoScrollDirection;
@@ -427,8 +430,8 @@ function startAutoScroll() {
 
 function resetAutoScroll() {
     clearInterval(autoScrollInterval);
-    if (!isAutoScrollPaused) {
-        startAutoScroll();
+    if (!isProfileVisible && !isAutoScrollPaused) {
+        startAutoScroll(); // Profil kapalıysa ve duraklatılmamışsa yeniden başlar
     }
 }
 
