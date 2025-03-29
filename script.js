@@ -5,7 +5,7 @@ const spotlight = document.querySelector('.spotlight');
 const artistProfile = document.querySelector('.artist-profile');
 const artistCard = document.querySelector('.artist-card');
 const blurOverlay = document.querySelector('.blur-overlay');
-let artworksData = []; // Başlangıçta boş, JSON’dan dolacak
+let artworksData = [];
 const backgroundWidth = 1920;
 let autoScrollInterval;
 let autoScrollDirection = 1;
@@ -14,12 +14,11 @@ let hasAppeared = [];
 let isProfileVisible = true;
 let isAutoScrollPaused = false;
 
-// JSON dosyasını çek ve eserleri oluştur
 async function loadArtworks() {
     try {
         const response = await fetch('/artworks.json');
         artworksData = await response.json();
-        hasAppeared = Array(artworksData.length).fill(false); // hasAppeared’ı dinamik olarak ayarla
+        hasAppeared = Array(artworksData.length).fill(false);
         createArtworks();
         setupArtworkEvents();
         goToSlide(0);
@@ -31,9 +30,8 @@ async function loadArtworks() {
     }
 }
 
-// Eserleri dinamik olarak oluştur
 function createArtworks() {
-    galleryWall.innerHTML = ''; // Mevcut içeriği temizle
+    galleryWall.innerHTML = '';
     artworksData.forEach(artwork => {
         const artworkDiv = document.createElement('div');
         artworkDiv.classList.add('artwork');
@@ -71,7 +69,6 @@ function createArtworks() {
     });
 }
 
-// Slayt değiştirme fonksiyonu
 function goToSlide(index, fromArtworksButton = false) {
     const visibleArtworks = Array.from(document.querySelectorAll('.artwork')).filter(artwork => artwork.style.display !== 'none');
     if (index < 0 || index >= visibleArtworks.length) return;
@@ -123,7 +120,6 @@ function goToSlide(index, fromArtworksButton = false) {
     });
 }
 
-// Eserleri kategoriye göre filtreleme
 function filterArtworks(category) {
     const visibleArtworks = Array.from(document.querySelectorAll('.artwork')).filter(artwork => {
         const artworkCategory = artwork.getAttribute('data-category');
@@ -143,7 +139,6 @@ function filterArtworks(category) {
     goToSlide(0, true);
 }
 
-// Dil değiştirme fonksiyonu
 function changeLanguage(lang) {
     currentLang = lang;
 
@@ -216,7 +211,6 @@ function changeLanguage(lang) {
     }
 }
 
-// Dil bayraklarına tıklama olayları
 document.querySelectorAll('.lang-flag').forEach(flag => {
     flag.addEventListener('click', () => {
         const lang = flag.getAttribute('data-lang');
@@ -224,7 +218,6 @@ document.querySelectorAll('.lang-flag').forEach(flag => {
     });
 });
 
-// Menü tıklama olayları
 document.querySelectorAll('.menu-item').forEach(item => {
     item.addEventListener('click', (e) => {
         e.preventDefault();
@@ -243,7 +236,6 @@ document.querySelectorAll('.menu-item').forEach(item => {
     });
 });
 
-// Alt menü tıklama olayları
 document.querySelectorAll('.submenu-item').forEach(item => {
     item.addEventListener('click', (e) => {
         e.preventDefault();
@@ -258,7 +250,6 @@ document.querySelectorAll('.submenu-item').forEach(item => {
     });
 });
 
-// Pop-up kapatma (çarpı butonu ile)
 document.querySelectorAll('.close-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         btn.closest('.popup').style.display = 'none';
@@ -272,7 +263,6 @@ document.querySelectorAll('.close-btn').forEach(btn => {
     });
 });
 
-// Pop-up dışına tıklayınca kapatma
 document.querySelectorAll('.popup').forEach(popup => {
     popup.addEventListener('click', (e) => {
         if (e.target.closest('.popup-content')) return;
@@ -287,14 +277,12 @@ document.querySelectorAll('.popup').forEach(popup => {
     });
 });
 
-// Artist Card'a tıklama olayı (profil alanını geri getir)
 artistCard.addEventListener('click', () => {
     goToSlide(0);
     filterArtworks('all');
     resetAutoScroll();
 });
 
-// Gallery Wall'a tıklama olayı (mobil versiyonda profil alanını kapat)
 galleryWall.addEventListener('click', (e) => {
     if (window.innerWidth <= 768 && isProfileVisible) {
         if (e.target.closest('.artwork-image') || e.target.closest('.label')) return;
@@ -303,7 +291,6 @@ galleryWall.addEventListener('click', (e) => {
     }
 });
 
-// Fare tekerleği ile kaydırma
 document.querySelector('.gallery-container').addEventListener('wheel', (e) => {
     e.preventDefault();
     const delta = Math.sign(e.deltaY);
@@ -315,7 +302,6 @@ document.querySelector('.gallery-container').addEventListener('wheel', (e) => {
     }
 });
 
-// Dokunmatik ekran için kaydırma
 let touchStartX = 0;
 document.querySelector('.gallery-container').addEventListener('touchstart', (e) => {
     touchStartX = e.touches[0].clientX;
@@ -336,7 +322,6 @@ document.querySelector('.gallery-container').addEventListener('touchmove', (e) =
     }
 });
 
-// Eser resmine tıklama olayı (pop-up galeri)
 function setupArtworkEvents() {
     document.querySelectorAll('.artwork-image').forEach((image) => {
         image.setAttribute('draggable', 'false');
@@ -387,7 +372,6 @@ function setupArtworkEvents() {
     });
 }
 
-// Klavye navigasyonu
 document.addEventListener('keydown', (e) => {
     const artworkGalleryPopup = document.getElementById('artwork-gallery');
     const galleryImagesContainer = artworkGalleryPopup.querySelector('.artwork-gallery-images');
@@ -420,7 +404,6 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Otomatik kaydırma fonksiyonu
 function startAutoScroll() {
     autoScrollInterval = setInterval(() => {
         const visibleArtworks = Array.from(document.querySelectorAll('.artwork')).filter(artwork => artwork.style.display !== 'none');
@@ -438,7 +421,6 @@ function startAutoScroll() {
     }, 3000);
 }
 
-// Otomatik kaydırmayı sıfırlama ve yeniden başlatma
 function resetAutoScroll() {
     clearInterval(autoScrollInterval);
     if (!isAutoScrollPaused) {
@@ -446,5 +428,4 @@ function resetAutoScroll() {
     }
 }
 
-// İlk yükleme
 loadArtworks();
