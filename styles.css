@@ -599,6 +599,10 @@ body {
     transition: background 0.3s ease;
 }
 
+.interested-button span {
+    color: #000; /* Yazının siyah olduğundan emin oluyoruz */
+}
+
 .interested-button img {
     width: 20px;
     height: 20px;
@@ -682,7 +686,7 @@ body {
         padding: 15px;
         display: flex;
         flex-direction: column;
-        align-items: center; /* Buton ve içeriği ortalamak için */
+        align-items: center; /* Butonu ortalamak için */
     }
     .artwork-gallery-header h2 {
         font-size: 20px;
@@ -694,7 +698,7 @@ body {
         flex-direction: column; /* Mobilde dikey sıralama */
         overflow-x: hidden; /* Yatay kaydırmayı devre dışı bırak */
         overflow-y: auto; /* Dikey kaydırmayı etkinleştir */
-        order: 2; /* Görselleri butondan sonraya taşı */
+        order: 2; /* Resimleri aşağıya taşı */
     }
     .artwork-gallery-images img {
         max-height: 50vh;
@@ -722,14 +726,18 @@ body {
     .interested-button {
         font-size: 14px;
         padding: 8px 16px;
-        order: 1; /* Butonu görsellerden önceye taşı */
-        margin-bottom: 20px; /* Görsellerle arasında boşluk bırak */
+        order: 1; /* Butonu resmin üstüne taşı */
+        margin-bottom: 20px; /* Resimlerle arasında boşluk bırak */
+    }
+    .interested-button span {
+        color: #000; /* Yazının siyah olduğundan emin oluyoruz */
     }
     .interested-button img {
         width: 18px;
         height: 18px;
     }
 }
+
 .intro-video-container {
     position: fixed;
     top: 0;
@@ -746,6 +754,7 @@ body {
     height: 100%;
     object-fit: cover;
 }
+
 .artist-card-header {
     position: relative;
     display: inline-block;
