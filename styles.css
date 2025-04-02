@@ -715,8 +715,8 @@ body {
     top: 50%; /* Yazının ortasına hizalar */
     left: 50%;
     transform: translate(-50%, -50%); /* Tam merkeze yerleştirir */
-    width: 20px; /* İkon boyutunu ayarlayabilirsin */
-    height: 20px;
+    width: 30px; /* İkon boyutunu ayarlayabilirsin */
+    height: 30px;
     display: none; /* Varsayılan olarak gizli */
 }
 
