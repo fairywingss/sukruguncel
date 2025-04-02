@@ -705,12 +705,21 @@ body {
     height: 100%;
     object-fit: cover;
 }
-.artist-card.blink {
-    animation: blink 0.5s ease;
+.artist-card-header {
+    position: relative;
+    display: inline-block;
 }
 
-@keyframes blink {
-    0% { opacity: 1; }
-    50% { opacity: 0.5; }
-    100% { opacity: 1; }
+.tap-icon {
+    position: absolute;
+    top: -20px; /* Yazının üstünde görünmesi için */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px; /* İkon boyutunu ayarlayabilirsin */
+    height: 20px;
+    display: none; /* Varsayılan olarak gizli */
+}
+
+.artist-name {
+    cursor: pointer; /* Tıklanabilir olduğunu belirtir */
 }
