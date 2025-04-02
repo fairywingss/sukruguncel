@@ -380,6 +380,30 @@ function setupArtworkEvents() {
                 galleryImagesContainer.appendChild(detailImage2);
             }
 
+            // Eserle İlgileniyorum Butonu Ekleme
+            const interestedButton = document.createElement('a');
+            interestedButton.classList.add('interested-button');
+            interestedButton.href = `https://wa.me/905541211651?text=Merhaba%2C%20${artwork.id}%20kimlikli%20eserinizle%20ilgileniyorum.`;
+            interestedButton.target = '_blank';
+
+            const whatsappIcon = document.createElement('img');
+            whatsappIcon.src = 'images/whatsapp.png';
+            whatsappIcon.alt = 'WhatsApp';
+
+            const buttonText = document.createElement('span');
+            buttonText.textContent = 'Eserle İlgileniyorum';
+
+            interestedButton.appendChild(whatsappIcon);
+            interestedButton.appendChild(buttonText);
+
+            // Butonu pop-up içeriğine ekleme
+            const popupContent = artworkGalleryPopup.querySelector('.popup-content');
+            const existingButton = popupContent.querySelector('.interested-button');
+            if (existingButton) {
+                existingButton.remove(); // Eğer zaten bir buton varsa, kaldır ve yenisini ekle
+            }
+            popupContent.appendChild(interestedButton);
+
             artworkGalleryPopup.style.display = 'flex';
 
             if (!isAutoScrollPaused) {
