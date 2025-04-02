@@ -588,8 +588,8 @@ body {
     align-items: center;
     gap: 8px;
     padding: 10px 20px;
-    background: #25D366; /* WhatsApp yeşili */
-    color: #fff;
+    background: #d3d3d3; /* Gri arka plan */
+    color: #000; /* Siyah yazı */
     text-decoration: none;
     font-family: 'Raleway', sans-serif;
     font-size: 16px;
@@ -605,7 +605,7 @@ body {
 }
 
 .interested-button:hover {
-    background: #1ebe57; /* Daha koyu bir WhatsApp yeşili */
+    background: #b0b0b0; /* Daha koyu gri */
 }
 
 /* Mobil uyumluluk */
@@ -680,6 +680,9 @@ body {
     #artwork-gallery .popup-content {
         max-height: 70vh;
         padding: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Buton ve içeriği ortalamak için */
     }
     .artwork-gallery-header h2 {
         font-size: 20px;
@@ -691,6 +694,7 @@ body {
         flex-direction: column; /* Mobilde dikey sıralama */
         overflow-x: hidden; /* Yatay kaydırmayı devre dışı bırak */
         overflow-y: auto; /* Dikey kaydırmayı etkinleştir */
+        order: 2; /* Görselleri butondan sonraya taşı */
     }
     .artwork-gallery-images img {
         max-height: 50vh;
@@ -718,6 +722,8 @@ body {
     .interested-button {
         font-size: 14px;
         padding: 8px 16px;
+        order: 1; /* Butonu görsellerden önceye taşı */
+        margin-bottom: 20px; /* Görsellerle arasında boşluk bırak */
     }
     .interested-button img {
         width: 18px;
