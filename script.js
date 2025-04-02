@@ -432,4 +432,32 @@ function resetAutoScroll() {
     }
 }
 
-loadArtworks();
+// Mobil video oynatma kontrolü
+document.addEventListener('DOMContentLoaded', () => {
+    const introVideoContainer = document.getElementById('intro-video-container');
+    const introVideo = document.getElementById('intro-video');
+    const galleryContainer = document.querySelector('.gallery-container');
+
+    if (window.innerWidth <= 768) {
+        introVideoContainer.style.display = 'block';
+        galleryContainer.style.display = 'none'; // Site içeriğini gizle
+        introVideo.play();
+
+        introVideo.addEventListener('ended', () => {
+            introVideoContainer.style.display = 'none';
+            galleryContainer.style.display = 'block'; // Site içeriğini göster
+            loadArtworks(); // Video bittikten sonra siteyi yükle
+        });
+
+        // Video oynatılmazsa (hata durumunda) manuel geçmek için
+        introVideo.addEventListener('error', () => {
+            introVideoContainer.style.display = 'none';
+            galleryContainer.style.display = 'block';
+            loadArtworks();
+        });
+    } else {
+        introVideoContainer.style.display = 'none';
+        galleryContainer.style.display = 'block';
+        loadArtworks(); // Masaüstünde direkt yükle
+    }
+});
