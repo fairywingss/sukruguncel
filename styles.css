@@ -582,6 +582,32 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* Eserle İlgileniyorum Butonu Stili */
+.interested-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: #25D366; /* WhatsApp yeşili */
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: background 0.3s ease;
+}
+
+.interested-button img {
+    width: 20px;
+    height: 20px;
+}
+
+.interested-button:hover {
+    background: #1ebe57; /* Daha koyu bir WhatsApp yeşili */
+}
+
 /* Mobil uyumluluk */
 @media (max-width: 768px) {
     .artist-profile {
@@ -687,6 +713,15 @@ body {
     .submenu a {
         font-size: 14px;
         padding: 5px 10px;
+    }
+    /* Mobil için Eserle İlgileniyorum Butonu */
+    .interested-button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+    .interested-button img {
+        width: 18px;
+        height: 18px;
     }
 }
 .intro-video-container {
