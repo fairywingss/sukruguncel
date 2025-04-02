@@ -432,32 +432,28 @@ function resetAutoScroll() {
     }
 }
 
-// Mobil video oynatma kontrolü
+// Intro video kontrolü
 document.addEventListener('DOMContentLoaded', () => {
-    const introVideoContainer = document.getElementById('intro-video-container');
     const introVideo = document.getElementById('intro-video');
-    const galleryContainer = document.querySelector('.gallery-container');
+    const introContainer = document.getElementById('intro-video-container');
+    const isMobile = window.innerWidth <= 768;
+    const hasSeenIntro = localStorage.getItem('hasSeenIntro');
 
-    if (window.innerWidth <= 768) {
-        introVideoContainer.style.display = 'block';
-        galleryContainer.style.display = 'none'; // Site içeriğini gizle
+    if (isMobile && !hasSeenIntro) {
+        introContainer.style.display = 'block';
         introVideo.play();
 
         introVideo.addEventListener('ended', () => {
-            introVideoContainer.style.display = 'none';
-            galleryContainer.style.display = 'block'; // Site içeriğini göster
-            loadArtworks(); // Video bittikten sonra siteyi yükle
-        });
-
-        // Video oynatılmazsa (hata durumunda) manuel geçmek için
-        introVideo.addEventListener('error', () => {
-            introVideoContainer.style.display = 'none';
-            galleryContainer.style.display = 'block';
-            loadArtworks();
+            introContainer.style.transition = 'opacity 1s ease';
+            introContainer.style.opacity = '0';
+            setTimeout(() => {
+                introContainer.style.display = 'none';
+                localStorage.setItem('hasSeenIntro', 'true');
+            }, 1000); // 1 saniye fade-out süresi
         });
     } else {
-        introVideoContainer.style.display = 'none';
-        galleryContainer.style.display = 'block';
-        loadArtworks(); // Masaüstünde direkt yükle
+        introContainer.style.display = 'none';
     }
 });
+
+loadArtworks();
