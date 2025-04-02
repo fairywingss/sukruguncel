@@ -5,18 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Şükrü Aslan Sanat Galerisi</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Playfair Display ve Raleway fontları -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Raleway:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div id="intro-video-container" class="intro-video-container">
+        <video id="intro-video" playsinline>
+            <source src="images/sukruaslan.webm" type="video/webm">
+            Tarayıcınız video oynatmayı desteklemiyor.
+        </video>
+    </div>
     <div class="gallery-container">
-        <!-- Arka Plan -->
         <div class="background-wall"></div>
-
-        <!-- Bulanıklık Katmanı -->
         <div class="blur-overlay"></div>
-
-        <!-- Sanatçı Profili -->
         <div class="artist-profile">
             <img src="images/artist-photo.jpg" alt="Sanatçı Fotoğrafı" class="artist-photo">
             <h1>Şükrü Aslan</h1>
@@ -35,14 +35,11 @@
                     <li><a href="#" class="menu-item" data-target="contact">İletişim</a></li>
                 </ul>
             </nav>
-            <!-- Dil Seçenekleri -->
             <div class="language-switcher">
                 <img src="images/tr.png" alt="Türkçe" class="lang-flag" data-lang="tr">
                 <img src="images/en.png" alt="English" class="lang-flag" data-lang="en">
             </div>
         </div>
-
-        <!-- Sanatçı Kartı (Sol Üstte) -->
         <div class="artist-card">
             <h2>Şükrü Aslan</h2>
             <div class="social-icons">
@@ -54,28 +51,18 @@
                 </a>
             </div>
         </div>
-
-        <!-- Galeri -->
-        <div class="gallery-wall">
-            <!-- Eserler dinamik olarak eklenecek -->
-        </div>
-
-        <!-- Spot Işığı -->
+        <div class="gallery-wall"></div>
         <div class="spotlight"></div>
-
-        <!-- Pop-up’lar -->
         <div class="popup" id="about">
             <div class="popup-content">
                 <span class="close-btn">×</span>
                 <h2 data-lang-tr="Hakkında" data-lang-en="About"></h2>
-                <!-- Türkçe Metin -->
                 <div class="about-text" data-lang-tr>
                     <p>Şükrü Aslan, 2012 yılında Çukurova Üniversitesi Resim-İş Öğretmenliği Bölümü, Heykel Anabilim Dalı’ndan mezun oldu. 2016 yılında öğretmen olarak atandı. Çalışmalarında malzeme olarak metali tercih eden Şükrü Aslan, heykellerini “Varoluşçuluk” felsefesine dayandırarak üretmektedir.</p>
                     <p>Bunun yanı sıra, resimlerinde de aynı felsefi yaklaşımı benimseyerek insanın varoluşsal karmaşasını görsel bir dille ifade etmektedir. Sanatçı, çalışmalarına Mersin’de devam etmektedir.</p>
                     <p>“Heykellerimi konu olarak ‘Varoluşçu’ felsefeye dayalı figüratif bir yaklaşımla temellendirmeye çalışıyorum. Genellikle malzeme olarak metali kullanıyorum. Metal; direnebilir, kırılabilir, aşınabilir ve baskı altında şekil alabilir, tıpkı insan ruhu gibi. Bu açıdan metali ve insanı özdeş buluyorum.”</p>
                     <p>“Heykellerimde bir anlatım biçimi olarak kullandığım karmaşık ve dolaşık tel yığınlarıyla, bireyin birkaç deneyimle var olmadığını; onu birey yapan birikimin, daha karmaşık bir olgular bütünü olduğunu anlatmaya çalışıyorum. Bu bağlamda kullandığım tel yığını, birkaç kelimeyle açıklanamayacak kadar karmaşık olan bireyin özünü temsil etmektedir.”</p>
                 </div>
-                <!-- İngilizce Metin -->
                 <div class="about-text" data-lang-en>
                     <p>Şükrü Aslan graduated from the Department of Painting and Art Education, Sculpture Major at Çukurova University in 2012. In 2016, he was appointed as a teacher. Preferring metal as a material in his works, Şükrü Aslan creates his sculptures based on the philosophy of “Existentialism”.</p>
                     <p>Additionally, he adopts the same philosophical approach in his paintings, expressing the existential complexity of humanity through a visual language. The artist continues his work in Mersin.</p>
@@ -111,7 +98,6 @@
                 </div>
             </div>
         </div>
-        <!-- Yeni Pop-up: Resim Galerisi -->
         <div class="popup" id="artwork-gallery">
             <div class="popup-content">
                 <span class="close-btn">×</span>
@@ -124,7 +110,6 @@
         </div>
     </div>
     <script src="script.js"></script>
-    <!-- Netlify Identity Widget -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <script>
       if (window.netlifyIdentity) {
