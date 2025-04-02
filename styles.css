@@ -705,3 +705,12 @@ body {
     height: 100%;
     object-fit: cover;
 }
+.artist-card.blink {
+    animation: blink 0.5s ease;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
