@@ -90,6 +90,11 @@ function goToSlide(index, fromArtworksButton = false) {
         if (window.innerWidth <= 768) {
             artistProfile.classList.add('hidden');
         }
+        // Profil kapandığında kart 1 kere yanıp sönsün
+        artistCard.classList.add('blink');
+        setTimeout(() => {
+            artistCard.classList.remove('blink');
+        }, 500); // 0.5 saniye yanıp sönme
     } else {
         isProfileVisible = true;
         artistCard.classList.remove('visible');
@@ -277,10 +282,13 @@ document.querySelectorAll('.popup').forEach(popup => {
     });
 });
 
-artistCard.addEventListener('click', () => {
-    goToSlide(0);
-    filterArtworks('all');
-    resetAutoScroll();
+artistCard.addEventListener('click', (e) => {
+    // Eğer "Şükrü Aslan" yazısına tıklanırsa profili aç
+    if (e.target.tagName === 'H2') {
+        goToSlide(0);
+        filterArtworks('all');
+        resetAutoScroll();
+    }
 });
 
 galleryWall.addEventListener('click', (e) => {
@@ -368,6 +376,18 @@ function setupArtworkEvents() {
 
             artworkGalleryPopup.style.display = 'flex';
 
+            // Pop-up galerideki resimlere sağ tık ve uzun basmayı engelle
+            galleryImagesContainer.querySelectorAll('img').forEach(img => {
+                img.setAttribute('draggable', 'false');
+                img.setAttribute('onselectstart', 'return false');
+                img.addEventListener('contextmenu', (e) => {
+                    e.preventDefault();
+                });
+                img.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                });
+            });
+
             if (!isAutoScrollPaused) {
                 clearInterval(autoScrollInterval);
                 isAutoScrollPaused = true;
@@ -409,10 +429,10 @@ document.addEventListener('keydown', (e) => {
 });
 
 function startAutoScroll() {
-    clearInterval(autoScrollInterval); // Mevcut interval’i temizle
+    clearInterval(autoScrollInterval);
     autoScrollInterval = setInterval(() => {
         if (isProfileVisible) {
-            return; // Profil açıkken otomatik geçiş durur
+            return;
         }
         const visibleArtworks = Array.from(document.querySelectorAll('.artwork')).filter(artwork => artwork.style.display !== 'none');
         let newSlide = currentSlide + autoScrollDirection;
@@ -432,7 +452,7 @@ function startAutoScroll() {
 function resetAutoScroll() {
     clearInterval(autoScrollInterval);
     if (!isAutoScrollPaused && !isProfileVisible) {
-        startAutoScroll(); // Profil kapalıysa yeniden başlat
+        startAutoScroll();
     }
 }
 
@@ -453,7 +473,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 introContainer.style.display = 'none';
                 localStorage.setItem('hasSeenIntro', 'true');
-            }, 1000); // 1 saniye fade-out süresi
+            }, 1000);
         });
     } else {
         introContainer.style.display = 'none';
