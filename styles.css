@@ -712,9 +712,9 @@ body {
 
 .tap-icon {
     position: absolute;
-    top: -20px; /* Yazının üstünde görünmesi için */
+    top: 50%; /* Yazının ortasına hizalar */
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%); /* Tam merkeze yerleştirir */
     width: 20px; /* İkon boyutunu ayarlayabilirsin */
     height: 20px;
     display: none; /* Varsayılan olarak gizli */
