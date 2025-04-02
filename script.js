@@ -409,7 +409,11 @@ document.addEventListener('keydown', (e) => {
 });
 
 function startAutoScroll() {
+    clearInterval(autoScrollInterval); // Mevcut interval’i temizle
     autoScrollInterval = setInterval(() => {
+        if (isProfileVisible) {
+            return; // Profil açıkken otomatik geçiş durur
+        }
         const visibleArtworks = Array.from(document.querySelectorAll('.artwork')).filter(artwork => artwork.style.display !== 'none');
         let newSlide = currentSlide + autoScrollDirection;
 
@@ -427,8 +431,8 @@ function startAutoScroll() {
 
 function resetAutoScroll() {
     clearInterval(autoScrollInterval);
-    if (!isAutoScrollPaused) {
-        startAutoScroll();
+    if (!isAutoScrollPaused && !isProfileVisible) {
+        startAutoScroll(); // Profil kapalıysa yeniden başlat
     }
 }
 
