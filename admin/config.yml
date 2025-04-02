@@ -9,6 +9,7 @@ collections:
     folder: "artworks"
     create: true
     slug: "{{slug}}"
+    summary: "{{title}} (ID: {{id}})" # Eser başlığı ve ID'sini listede göster
     fields:
       - { label: "Eser ID", name: "id", widget: "string" }
       - { label: "Kategori", name: "category", widget: "select", options: ["resim", "heykel"] }
